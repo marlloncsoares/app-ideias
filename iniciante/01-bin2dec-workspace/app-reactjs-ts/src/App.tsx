@@ -1,45 +1,43 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useState } from "react"
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+
+  const [binaryNumber, setbinaryNumber] = useState<string>('');
+  const [decimalNumber, setDecimalNumber] = useState<number | undefined>();
+
+  const handleBinaryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    if (value.length > 8) return;
+
+    let binary = '';
+    for (const digit of value) {
+      binary += (digit === '1' || digit === '0') ? digit : '';
+    }
+
+    setbinaryNumber(binary);
+    isNaN(parseInt(binary, 10)) ? setDecimalNumber(undefined) : setDecimalNumber(parseInt(binary, 2)); 
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <>
+      <div>
+        <form>
+          <div>
+            <label>Informe o binário:</label><br />
+            <input 
+              type="text" 
+              name="binario" 
+              value={ binaryNumber } 
+              onChange={handleBinaryChange} 
+            />
+          </div>
+
+          <div>
+            <label>Decimal equivalente:</label><br />
+            <input type="text" disabled name="binario" value={ decimalNumber } />
+          </div>
+        </form>
+      </div>
+    </>
   )
 }
-
-export default App
