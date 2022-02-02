@@ -1,9 +1,11 @@
 import { useState } from "react"
 
+type htmlInputValue = number | string | readonly string[] | undefined;
+
 export default function App() {
 
-  const [binaryNumber, setbinaryNumber] = useState<string>('');
-  const [decimalNumber, setDecimalNumber] = useState<number | string>();
+  const [binaryNumber, setbinaryNumber] = useState<htmlInputValue>('');
+  const [decimalNumber, setDecimalNumber] = useState<htmlInputValue>();
 
   const handleBinaryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
