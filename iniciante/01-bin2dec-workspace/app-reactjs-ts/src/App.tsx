@@ -3,7 +3,7 @@ import { useState } from "react"
 export default function App() {
 
   const [binaryNumber, setbinaryNumber] = useState<string>('');
-  const [decimalNumber, setDecimalNumber] = useState<number | undefined>();
+  const [decimalNumber, setDecimalNumber] = useState<number | string>();
 
   const handleBinaryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -15,7 +15,7 @@ export default function App() {
     }
 
     setbinaryNumber(binary);
-    isNaN(parseInt(binary, 10)) ? setDecimalNumber(undefined) : setDecimalNumber(parseInt(binary, 2)); 
+    isNaN(parseInt(binary, 10)) || value === '' ? setDecimalNumber('') : setDecimalNumber(parseInt(binary, 2));      
   }
 
   return (
